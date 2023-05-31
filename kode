@@ -1,0 +1,735 @@
+library(readr)
+library(ggplot2)
+library(tidyverse)
+library(dplyr)
+library(splitstackshape)
+library(data.table)
+
+data_greece <- function(df){new.df <- df %>%
+    filter(COUNTRYCODEOFHOMEINSTITUTION == "GR",
+           `AGE`<=24)
+  return(new.df)
+}
+
+data_greece2 <- function(df){new.df <- df %>%
+  filter(`Participant Country` == "Greece",
+         `Participant Profile` == "Learner",
+         `Participant Age` <= 24,
+         `Participant Age` >=18)
+return(new.df)
+}
+
+data_uk <- function(df){new.df <- df %>%
+  filter(COUNTRYCODEOFHOMEINSTITUTION == "UK",
+         `AGE`<=24)
+return(new.df)
+}
+
+data_uk2 <- function(df){new.df <- df %>%
+  filter(`Participant Country` == "United Kingdom",
+         `Participant Profile` == "Learner",
+         `Participant Age` <= 24,
+         `Participant Age` >=18)
+return(new.df)
+}
+
+data_fr <- function(df){new.df <- df %>%
+  filter(COUNTRYCODEOFHOMEINSTITUTION == "FR",
+         `AGE`<=24)
+return(new.df)
+}
+
+data_fr2 <- function(df){new.df <- df %>%
+  filter(`Participant Country` == "France",
+         `Participant Profile` == "Learner",
+         `Participant Age` <= 24,
+         `Participant Age` >=18)
+return(new.df)
+}
+
+data_ger <- function(df){new.df <- df %>%
+  filter(COUNTRYCODEOFHOMEINSTITUTION == "DE",
+         `AGE`<=24)
+return(new.df)
+}
+
+data_ger2 <- function(df){new.df <- df %>%
+  filter(`Participant Country` == "Germany",
+         `Participant Profile` == "Learner",
+         `Participant Age` <= 24,
+         `Participant Age` >=18)
+return(new.df)
+}
+
+data_sp <- function(df){new.df <- df %>%
+  filter(COUNTRYCODEOFHOMEINSTITUTION == "ES",
+         `AGE`<=24)
+return(new.df)
+}
+
+data_sp2 <- function(df){new.df <- df %>%
+  filter(`Participant Country` == "Spain",
+         `Participant Profile` == "Learner",
+         `Participant Age` <= 24,
+         `Participant Age` >=18)
+return(new.df)
+}
+
+##Greece 2010
+
+student_data_2010_csv <- read_delim("~/Downloads/student_data_2010.csv.gz", 
+                                    delim = ";", escape_double = FALSE, trim_ws = TRUE)
+
+greece2010 <- data_greece(student_data_2010_csv)
+
+##UK 2010
+
+uk2010 <- data_uk(student_data_2010_csv)
+
+##France 2010
+
+fr2010 <- data_fr(student_data_2010_csv)
+
+##Germany 2010
+
+ger2010 <- data_ger(student_data_2010_csv)
+
+##Spain 2010
+
+spa2010 <- data_sp(student_data_2010_csv)
+
+##Greece 2009
+
+student_data_2009_csv <- read_delim("~/Downloads/student_data_2009.csv.gz", 
+                                    delim = ";", escape_double = FALSE, trim_ws = TRUE)
+View(student_data_2009_csv)
+
+student_data_2009_2 <- student_data_2009_csv %>%
+  rename(`COUNTRYCODEOFHOMEINSTITUTION`=`COUNTRYOFHOMEINSTITUTION`)
+
+greece2009 <- data_greece(student_data_2009_2)
+
+## UK 2009
+
+uk2009 <- data_uk(student_data_2009_2)
+
+##France 2009
+
+fr2009 <- data_fr(student_data_2009_2)
+
+##Germany 2009
+
+ger2009 <- data_ger(student_data_2009_2)
+
+##Spain 2009
+
+spa2009 <- data_sp(student_data_2009_2)
+
+## Greece 2011
+student_data_2011_csv <- fread("https://data.europa.eu/euodp/data/storage/f/2015-03-13T153634/student_1112.csv")
+
+greece2011 <- data_greece(student_data_2011_csv)
+
+##UK 2011
+
+uk2011 <- data_uk(student_data_2011_csv)
+
+##France 2011
+
+fr2011 <- data_fr(student_data_2011_csv)
+
+##Germany 2011
+
+ger2011 <- data_ger(student_data_2011_csv)
+
+##Spain 2011
+
+spa2011 <- data_sp(student_data_2011_csv)
+
+##Greece 2013-14
+
+greece2013 <- fread("https://data.europa.eu/euodp/en/data/storage/f/2023-05-05T133212/Erasmus%2B_Key%20Action%201_Finalised%20mobility%20activities_Started%20in%202014.csv")
+
+greece2013_2 <- data_greece2(greece2013)
+
+## UK 2013
+
+uk2013 <- data_uk2(greece2013)
+
+##France 2013
+
+fr2013 <- data_fr2(greece2013)
+
+##Germany 2013
+
+ger2013 <- data_ger2(greece2013)
+
+##Spain 2013
+
+spa2013 <- data_sp2(greece2013)
+
+##Greece 2014
+
+greece2014 <- fread("https://data.europa.eu/euodp/en/data/storage/f/2023-05-05T133212/Erasmus%2B_Key%20Action%201_Finalised%20mobility%20activities_Started%20in%202014.csv")
+
+greece2014_2 <- data_greece2(greece2014)
+
+## UK 2014
+
+uk2014 <- data_uk2(greece2014)
+
+##France 2014
+
+fr2014 <- data_fr2(greece2014)
+
+##Germany 2014
+
+ger2014 <- data_ger2(greece2014)
+
+##Spain 2014
+
+spa2014 <- data_sp2(greece2014)
+
+##Greece 2015
+
+greece2015 <- fread("https://data.europa.eu/euodp/en/data/storage/f/2023-05-05T133922/Erasmus%2B_Key%20Action%201_Finalised%20mobility%20activities_Started%20in%202015.csv")
+
+greece2015_2 <- data_greece2(greece2015)
+
+## UK 2015
+
+uk2015 <- data_uk2(greece2015)
+
+##France 2015
+
+fr2015 <- data_fr2(greece2015)
+
+##Germany 2015
+
+ger2015 <- data_ger2(greece2015)
+
+##Spain 2015
+
+spa2015 <- data_sp2(greece2015)
+
+##Greece 2016
+
+greece2016 <- fread("https://data.europa.eu/euodp/data/storage/f/2023-05-05T144218/Erasmus%2B_Key%20Action%201_Finalised%20mobility%20activities_Started%20in%202016.csv")
+
+greece2016_2 <- data_greece2(greece2016)
+
+##UK 2016
+
+uk2016 <- data_uk2(greece2016)
+
+##France 2016
+
+fr2016 <- data_fr2(greece2016)
+
+##Germany 2016
+
+ger2016 <- data_ger2(greece2016)
+
+##Spain 2016
+
+spa2016 <- data_sp2(greece2016)
+
+## Greece 2017
+
+greece2017 <- fread("https://data.europa.eu/euodp/en/data/storage/f/2023-05-07T055829/Erasmus%2B_Key%20Action%201_Finalised%20mobility%20activities_Started%20in%202017.csv")
+
+greece2017_2 <- data_greece2(greece2017)
+
+##UK 2017
+
+uk2017 <- data_uk2(greece2017)
+
+##France 2017
+
+fr2017 <- data_fr2(greece2017)
+
+##Germany 2017
+
+ger2017 <- data_ger2(greece2017)
+
+##Spain 2017
+
+spa2017 <- data_sp2(greece2017)
+
+##Greece 2018
+
+greece2018 <- fread("https://data.europa.eu/euodp/en/data/storage/f/2023-05-07T060617/Erasmus%2B_Key%20Action%201_Finalised%20mobility%20activities_Started%20in%202018.csv")
+
+greece2018_2 <- data_greece2(greece2018)
+
+##UK 2018
+
+uk2018 <- data_uk2(greece2018)
+
+##France 2018
+
+fr2018 <- data_fr2(greece2018)
+
+##Germany 2018
+
+ger2018 <- data_ger2(greece2018)
+
+##Spain 2018
+
+spa2018 <- data_sp2(greece2018)
+
+##Greece 2019
+
+greece2019 <- fread("https://data.europa.eu/euodp/en/data/storage/f/2023-05-07T061501/Erasmus%2B_Key%20Action%201_Finalised%20mobility%20activities_Started%20in%202019.csv")
+
+greece2019_2 <- data_greece2(greece2019)
+
+##UK 2019
+
+uk2019 <- data_uk2(greece2019)
+
+##France 2019
+
+fr2019 <- data_fr2(greece2019)
+
+##Germany 2019
+
+ger2019 <- data_ger2(greece2019)
+
+##Spain 2019
+
+spa2019 <- data_sp2(greece2019)
+
+##Greece 2020
+
+greece2020 <- fread("https://data.europa.eu/euodp/en/data/storage/f/2023-05-07T062406/Erasmus%2B_Key%20Action%201_Finalised%20mobility%20activities_Started%20in%202020.csv")
+
+greece2020_2 <- data_greece2(greece2020)
+
+##UK 2020
+
+uk2020 <- data_uk2(greece2020)
+
+##France 2020
+
+fr2020 <- data_fr2(greece2020)
+
+##Germany 2020
+
+ger2020 <- data_ger2(greece2020)
+
+##Spain 2020
+
+spa2020 <- data_sp2(greece2020)
+
+## Greece 2021
+
+greece2021 <- read_delim("~/Downloads/Mobility of participants under Erasmus+ in 2021.csv", 
+                                                                           delim = ";", escape_double = FALSE, trim_ws = TRUE)
+greece2021_2 <- greece2021 %>%
+  filter(`Participant Profile` == "Learner",
+         `Sending Country` == "EL - Greece")
+greece2021_3 <- as.numeric(greece2021_2$`Actual participants`)
+
+sum(greece2021_3)
+
+## UK 2021
+
+uk2021 <- greece2021 %>%
+  filter(`Participant Profile` == "Learner",
+         `Sending Country` == "UK - United Kingdom")
+
+##France 2021
+
+fr2021 <- greece2021 %>%
+  filter(`Participant Profile` == "Learner",
+         `Sending Country` == "FR - France")
+
+##Germany 2021
+
+ger2021 <- greece2021 %>%
+  filter(`Participant Profile` == "Learner",
+         `Sending Country` == "DE - Germany")
+
+##Spain 2021
+
+spa2021 <- greece2021 %>%
+  filter(`Participant Profile` == "Learner",
+         `Sending Country` == "ES - Spain")
+
+
+##Unemployment Greece 1991-2021
+
+unemp <- read_csv("~/Downloads/API_SL.UEM.1524.ZS_DS2_en_csv_v2_5359472 (1)/prove.csv")
+
+unemp_1 <- cSplit(unemp, "...3", sep = ",")
+
+unemp_2 <- unemp_1[-1:-2,-3:-36] %>%
+  rename(`Country Name`=`Data Source`,
+         `Country Code`=`World Development Indicators`,
+         `1991`=`...3_35`,
+         `1992`=`...3_36`,
+         `1993`=`...3_37`,
+         `1994`=`...3_38`,
+         `1995`=`...3_39`,
+         `1996`=`...3_40`,
+         `1997`=`...3_41`,
+         `1998`=`...3_42`,
+         `1999`=`...3_43`,
+         `2000`=`...3_44`,
+         `2001`=`...3_45`,
+         `2002`=`...3_46`,
+         `2003`=`...3_47`,
+         `2004`=`...3_48`,
+         `2005`=`...3_49`,
+         `2006`=`...3_50`,
+         `2007`=`...3_51`,
+         `2008`=`...3_52`,
+         `2009`=`...3_53`,
+         `2010`=`...3_54`,
+         `2011`=`...3_55`,
+         `2012`=`...3_56`,
+         `2013`=`...3_57`,
+         `2014`=`...3_58`,
+         `2015`=`...3_59`,
+         `2016`=`...3_60`,
+         `2017`=`...3_61`,
+         `2018`=`...3_62`,
+         `2019`=`...3_63`,
+         `2020`=`...3_64`,
+         `2021`=`...3_65`) %>%
+  mutate_at(c('1991', '1992', '1993', '1994', '1995', '1996', '1997', '1998', '1999', '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021'), as.numeric)
+
+filtered_countries <- unemp_2 %>%
+  filter(`Country Name` %in% c("Greece", "United Kingdom", "France", "Germany", "Spain"))
+
+filtered_countries2 <- filtered_countries[,-2]
+
+rowMeans(filtered_countries[ ,3:33])
+
+##Greece
+
+greece_unep <- unemp_2 %>%
+  filter(`Country Name` == "Greece")
+
+greece_unep.t=t(greece_unep)
+
+flipped_greece_unep <- as.data.frame(greece_unep.t)
+
+flipped_greece_unep2 <- flipped_greece_unep                                           
+flipped_greece_unep2$year <- row.names(flipped_greece_unep2)
+flipped_greece_unep2
+
+flipped_greece_unep3 <- flipped_greece_unep2[-1:-2,] %>%
+  rename(`Unemployment`=`V1`)
+
+sapply(flipped_greece_unep3, class)
+flipped_greece_unep3$Unemployment <- as.numeric(as.character(flipped_greece_unep3$Unemployment))
+flipped_greece_unep3$year <- as.numeric(as.character(flipped_greece_unep3$year))
+sapply(flipped_greece_unep3, class)
+
+##UK unemployed
+
+uk_unep <- unemp_2 %>%
+  filter(`Country Name` == "United Kingdom")
+
+uk_unep.t=t(uk_unep)
+
+flipped_uk_unep <- as.data.frame(uk_unep.t)
+
+flipped_uk_unep2 <- flipped_uk_unep                                           
+flipped_uk_unep2$year <- row.names(flipped_uk_unep2)
+flipped_uk_unep2
+
+flipped_uk_unep3 <- flipped_uk_unep2[-1:-2,] %>%
+  rename(`Unemployment`=`V1`)
+
+sapply(flipped_uk_unep3, class)
+flipped_uk_unep3$Unemployment <- as.numeric(as.character(flipped_uk_unep3$Unemployment))
+flipped_uk_unep3$year <- as.numeric(as.character(flipped_uk_unep3$year))
+sapply(flipped_uk_unep3, class)
+
+##France unemployment rate
+
+fr_unep <- unemp_2 %>%
+  filter(`Country Name` == "France")
+
+fr_unep.t=t(fr_unep)
+
+flipped_fr_unep <- as.data.frame(fr_unep.t)
+
+flipped_fr_unep2 <- flipped_fr_unep                                           
+flipped_fr_unep2$year <- row.names(flipped_fr_unep2)
+flipped_fr_unep2
+
+flipped_fr_unep3 <- flipped_fr_unep2[-1:-2,] %>%
+  rename(`Unemployment`=`V1`)
+
+sapply(flipped_fr_unep3, class)
+flipped_fr_unep3$Unemployment <- as.numeric(as.character(flipped_fr_unep3$Unemployment))
+flipped_fr_unep3$year <- as.numeric(as.character(flipped_fr_unep3$year))
+sapply(flipped_fr_unep3, class)
+
+##Germany unemployment rate
+
+ger_unep <- unemp_2 %>%
+  filter(`Country Name` == "Germany")
+
+ger_unep.t=t(ger_unep)
+
+flipped_ger_unep <- as.data.frame(ger_unep.t)
+
+flipped_ger_unep2 <- flipped_ger_unep                                           
+flipped_ger_unep2$year <- row.names(flipped_ger_unep2)
+flipped_ger_unep2
+
+flipped_ger_unep3 <- flipped_ger_unep2[-1:-2,] %>%
+  rename(`Unemployment`=`V1`)
+
+flipped_ger_unep3$Unemployment <- as.numeric(as.character(flipped_ger_unep3$Unemployment))
+flipped_ger_unep3$year <- as.numeric(as.character(flipped_ger_unep3$year))
+sapply(flipped_ger_unep3, class)
+
+##Spain unemployment rate
+
+spa_unep <- unemp_2 %>%
+  filter(`Country Name` == "Spain")
+
+spa_unep.t=t(spa_unep)
+
+flipped_spa_unep <- as.data.frame(spa_unep.t)
+
+flipped_spa_unep2 <- flipped_spa_unep                                           
+flipped_spa_unep2$year <- row.names(flipped_spa_unep2)
+flipped_spa_unep2
+
+flipped_spa_unep3 <- flipped_spa_unep2[-1:-2,] %>%
+  rename(`Unemployment`=`V1`)
+
+flipped_spa_unep3$Unemployment <- as.numeric(as.character(flipped_spa_unep3$Unemployment))
+flipped_spa_unep3$year <- as.numeric(as.character(flipped_spa_unep3$year))
+sapply(flipped_spa_unep3, class)
+
+##Graph Greece Youth Unemployment Rate
+
+ggplot(flipped_greece_unep3, aes(x=`year`, y=`Unemployment`))+
+geom_point()+
+geom_line()+
+theme_bw()
+
+ggplot(flipped_uk_unep3, aes(x=`year`, y=`Unemployment`))+
+  geom_point()+
+  geom_line()+
+  theme_bw()
+
+##Compared to other countries
+
+countries_longer <- filtered_countries2 %>%
+  pivot_longer(cols = 2:32,
+    values_to = "Unemployment",
+    names_to = "Years")
+
+
+countries_longer %>%
+  ggplot( aes(x=Years, y=Unemployment, group=`Country Name`, color=`Country Name`)) +
+  geom_line()+
+  theme(axis.text.x = element_text(angle = 90))
+
+##Participants Greece 2009-2021
+
+year <- c(2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021)
+participants <- c(2851,3056,3172,3591,2141,2181,5745,6446,6950,7907,5375,4188,4067)
+
+as.numeric(year)
+as.numeric(participants)
+
+greek_participants <- data.frame(year,participants)
+
+greek_participants
+
+write.csv(greek_participants, "Greek_participants")
+
+greek_participants %>%
+  ggplot(aes(x=year, y=participants))+
+  geom_line()
+
+filtered_years <- flipped_greece_unep3 %>%
+  filter(year >=2009)
+
+##Participants UK 2009-2021
+
+participants_uk <- c(11022,12086,12904,9094,8225,8235,13519,14439,15459,15197,7199,6525,9850)
+
+as.numeric(participants_uk)
+
+uk_participants <- data.frame(year,participants_uk)
+
+uk_participants
+
+write.csv(uk_participants, "United Kingdom Participants.csv", row.names = FALSE)
+
+uk_participants %>%
+  ggplot(aes(x=year, y=participants))+
+  geom_line()
+
+filtered_years_uk <- flipped_uk_unep3 %>%
+  filter(year >=2009)
+
+##Participation France 2009-2021
+
+participants_fr <- c(29232,30537,32070,23970,20185,26740,40609,45105,47315,50999,31160,30262,39508)
+
+as.numeric(participants_fr)
+
+fr_participants <- data.frame(year,participants_fr)
+
+fr_participants
+
+write.csv(fr_participants, "France Participants.csv", row.names = FALSE)
+
+fr_participants %>%
+  ggplot(aes(x=year, y=participants_fr))+
+  geom_line()+
+  labs(title = "France Participants")
+
+filtered_years_fr <- flipped_fr_unep3 %>%
+  filter(year >=2009)
+
+##Participation Germany
+
+participants_ger <- c(22017,22982,25196,23294,22724,28887,38203,41880,42940,44932,24817,22034,34324)
+
+as.numeric(participants_ger)
+
+ger_participants <- data.frame(year,participants_ger)
+
+ger_participants
+
+write.csv(uk_participants, "Germany Participants.csv", row.names = FALSE)
+
+ger_participants %>%
+  ggplot(aes(x=year, y=participants_ger))+
+  geom_line()
+
+filtered_years_ger <- flipped_ger_unep3 %>%
+  filter(year >=2009)
+
+##Participation Spain
+
+participants_spa <- c(25915,30166,32927,22807,31360,33548,45646,39191,42560,45292,17846,19941,42130)
+
+as.numeric(participants_spa)
+
+spa_participants <- data.frame(year,participants_spa)
+
+spa_participants
+
+write.csv(uk_participants, "Spain Participants.csv", row.names = FALSE)
+
+spa_participants %>%
+  ggplot(aes(x=year, y=participants_spa))+
+  geom_line()
+
+filtered_years_spa <- flipped_spa_unep3 %>%
+  filter(year >=2009)
+
+## Participation 2009-2021
+
+all_countries_part <- data.frame(year, participants,participants_uk,participants_fr,participants_ger,participants_spa)
+
+all_countries_part2 <- all_countries_part %>%
+  rename("Greece"="participants",
+         "The UK"="participants_uk",
+         "France"="participants_fr",
+         "Germany"="participants_ger",
+         "Spain"="participants_spa")
+
+all_countries_part3 <- all_countries_part2 %>% pivot_longer(cols=c("Greece", "The UK", "France", "Germany", "Spain"),
+                          names_to='Countries',
+                          values_to='Participants')
+
+ggplot(all_countries_part3, aes(x=year, y=Participants)) + 
+  geom_line(aes(color=Countries))
+
+##Merged unemployment and student participation
+
+merged_part_unep_gr <- filtered_years %>%
+  full_join(greek_participants, by= c("year"))
+
+merged_part_unep_uk <- filtered_years_uk %>%
+  full_join(uk_participants, by=c("year"))
+
+write.csv(merged_part_unep_uk, "merged uk", row.names = F)
+
+merged_part_unep_fr <- filtered_years_fr %>%
+  full_join(fr_participants, by=c("year"))
+
+write.csv(merged_part_unep_fr, "merged fr", row.names = F)
+
+merged_part_unep_ger <- filtered_years_ger %>%
+  full_join(ger_participants, by=c("year"))
+
+write.csv(merged_part_unep_ger, "merged ger", row.names = F)
+
+merged_part_unep_spa <- filtered_years_spa %>%
+  full_join(spa_participants, by=c("year"))
+
+write.csv(merged_part_unep_spa, "merged spa", row.names = F)
+
+##Regression analysis and Scatterplot Greece
+
+mod <- lm(Unemployment~participants, data = merged_part_unep_gr)
+
+summary(mod)
+
+prove <- summary(merged_part_unep_gr$Unemployment - mod$fitted.values)
+
+merged_part_unep_gr %>%
+  ggplot(aes(x=Unemployment, y=participants))+
+  geom_point()+
+  geom_smooth(method = lm)+
+  labs(title = "Participants vs Unemployment, Greece")
+
+##Regression analysis UK
+
+mod2 <- lm(Unemployment~participants, data = merged_part_unep_uk)
+
+summary(mod2)
+
+ggplot(merged_part_unep_uk, aes(x=Unemployment, y=participants))+
+  geom_point()+
+  geom_smooth(method = lm)+
+  labs(title = "Regression analysis, the UK")
+
+##Regression analysis France
+
+mod3 <- lm(Unemployment~participants, data = merged_part_unep_fr)
+
+summary(mod3)
+
+ggplot(merged_part_unep_fr, aes(x=Unemployment, y=participants))+
+  geom_point()+
+  geom_smooth(method = lm)+
+  labs(title = "Regression analysis, France")
+
+##Regression analysis, Germany
+
+mod4 <- lm(Unemployment~participants, data = merged_part_unep_ger)
+
+summary(mod4)
+
+ggplot(merged_part_unep_ger, aes(x=Unemployment, y=participants))+
+  geom_point()+
+  geom_smooth(method = lm)+
+  labs(title = "Regression analysis, Germany")
+
+##Regression analysis, Spain
+
+mod5 <- lm(Unemployment~participants, data = merged_part_unep_spa)
+
+summary(mod5)
+
+ggplot(merged_part_unep_spa, aes(x=Unemployment, y=participants))+
+  geom_point()+
+  geom_smooth(method = lm)+
+  labs(title = "Regression analysis, Spain")
